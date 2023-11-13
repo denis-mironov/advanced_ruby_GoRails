@@ -1,0 +1,1 @@
+p 'Hello from ./files_to_require/file_2.rb'
