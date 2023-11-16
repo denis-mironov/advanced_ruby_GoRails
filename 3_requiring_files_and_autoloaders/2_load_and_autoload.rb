@@ -30,4 +30,11 @@ autoload :Authorization, '../concerns/authorization.rb' # => Nothing happens
 # 'autoload' loads file only once
 Authorization # => 'Authorization loaded!'
 Authorization # => Nothing happens
+
 # _________________________________________________________________________
+# require, require_relative, load, autoload usage:
+
+'Use \'require\' when you want to use external gems (uses $LOAD_PATH)'
+'Use \'require_relative\' for local files relative to the current working directory'
+'Use \'load\' to pick up any changes you made to a file while the program is running'
+'Use \'autoload\' to speed up the initialization of your library by lazily loading the modules'
