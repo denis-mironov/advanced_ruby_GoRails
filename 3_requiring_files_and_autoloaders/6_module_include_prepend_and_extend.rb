@@ -1,5 +1,10 @@
 # _________________________________________________________________________
-# Include Module - adds module to the ancestors list and allow an INSTANCE to use it's methods
+# Include Module - adds module to the ancestors list and allow an INSTANCE to use it's methods.
+# Ancestors chain ex: [YourClass, IncludedModule, Object, Kernel, BasicObject]
+
+# You need to use 'include' if you want to overwrite methods from included module, because ruby will
+# find overwritten method in your class and return it and won't go to upper levels / ancestors trying
+# to find this method again.
 
 module Active
   def active?
@@ -66,6 +71,11 @@ p Client.surname # => Doe
 # _________________________________________________________________________
 # Prepend Module - works as 'include', but adds a module before the class in ancestors chain.
 # Useful if you want to wrap some logic around your methods.
+# Ancestors chain ex: [IncludedModule, YourClass, Object, Kernel, BasicObject]
+
+# If you use 'prepend' for a module, this means that you can't overwrite methods from this module,
+# because ruby will find these methods in the module and return them and won't go to upper levels / ancestors
+# trying to find them again.
 
 module CustomerData
   def wallet_id

@@ -2,6 +2,57 @@
 # Class variables are set accross a class and all it's subclasses.
 
 # _________________________________________________________________________
+# Instance variables
+# Available for all instances of the class. They should be initialized with instance creation or after,
+# during the code execution, otherwise they won't be available.
+
+class Square
+  @sides = 4
+
+  def square_sides
+    @sides
+  end
+end
+
+s = Square.new
+p s.square_sides # => nil -> because @sides instance varibale was not initialized
+p s # => #<Square:0x00007fbf9a995d70>
+
+class Triange
+  @sides = 4
+
+  def trinagle_sides
+    @sides = 3
+  end
+end
+
+t = Triange.new
+p t.trinagle_sides # => 3 -> because @sides instance varibale was initialized
+p t # => #<Triange:0x00007f8c340d5148 @sides=3>
+
+class Pentagon
+  def sides
+     p @sides = 5
+  end
+
+  def angle
+    p @sides
+    p @angle = 60
+  end
+
+  def data
+    p @sides
+    p @angle
+  end
+end
+
+pentagon = Pentagon.new
+pentagon.data  # => nil, nil
+pentagon.angle # => nil, 60
+pentagon.sides # => 5
+pentagon.data  # => 5, 60
+
+# _________________________________________________________________________
 # Class variables
 # Shared among all descendants.
 

@@ -14,7 +14,7 @@ block_method { 'Hello block!' }
 block_method { |el| el } # => el is not defined, block_method will print nil and not raise an error
 
 # While we are using standard yield to work with a block - it's a block, but when we define a '&block'
-# argument for a method, it becomes a Proc! '&' makes it a Proc!
+# argument for a method, it becomes a Proc! '&' (ampersand) makes it a Proc!
 
 def block_method(&block)
   p block # => #<Proc:0x00007fb3e88babe8 2_blocks_procs_lambdas.rb:21>
