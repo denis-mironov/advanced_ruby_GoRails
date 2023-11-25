@@ -25,7 +25,22 @@ other_user.greeting # => 'Hello, John'
 # Class (self) methods.
 # They are available only for the class itself
 
+# self.method_name construction is not available in module, here we can use ActiveSupport::Concern
+# 'class_methods' syntax sugar for these needs.
+module ClassMethods
+  require 'active_support/all'
+  extend ActiveSupport::Concern
+
+  class_methods do # => same as defining sel.method_name in class
+    def goodbye
+      p 'Goodbye'
+    end
+  end
+end
+
 class Customer
+  include ClassMethods
+
   def self.hello
     p 'Hey'
   end
@@ -37,8 +52,10 @@ end
 
 customer = Customer.new
 
-Customer.hello    # => 'Hey'
-Customer.greeting # => 'Hey, John'
+Customer.hello      # => 'Hey'
+Customer.greeting   # => 'Hey, John'
+Customer.goodbye    # => 'Goodbye'
+p Customer.singleton_methods # => [:hello, :greeting, :goodbye]
 # customer.hello    # => undefined method `hello' for #<Customer:0x00007f991d8ab548> (NoMethodError)
 # customer.greeting # => undefined method `greeting' for #<Customer:0x00007f991d8ab548> (NoMethodError)
 

@@ -21,6 +21,7 @@ p user.active? # => true
 p User.ancestors # => [User, Active, Object, Kernel, BasicObject]
 p User.instance_methods # => [:active?, ...]
 
+
 # _________________________________________________________________________
 # Include Module from required file
 
@@ -39,6 +40,7 @@ p user.created_at # => Date yesterday
 p user.registered_at # => Date today
 p user.registration_expires_at # => Date today + 1 year
 p User.ancestors # => [User, Active, Object, Kernel, BasicObject]
+
 
 # _________________________________________________________________________
 # Extend Module - adds methods of extended module to the class itself (to singleton methods)
@@ -67,6 +69,7 @@ p Client.ancestors # => [Client, Object, Kernel, BasicObject]
 p Client.singleton_methods # => [:account_number, :name, :surname]
 p Client.name # => John
 p Client.surname # => Doe
+
 
 # _________________________________________________________________________
 # Prepend Module - works as 'include', but adds a module before the class in ancestors chain.
@@ -98,5 +101,53 @@ p Customer.instance_methods # => [:wallet_id, :account_id, ...]
 p Customer.singleton_methods # => []
 p customer.wallet_id # => '12356'
 p customer.account_id # => '654321'
+
+
+# _________________________________________________________________________
+# Include both class and instance methods
+
+module RealtorJobInfo
+  require 'active_support/all'
+  extend ActiveSupport::Concern
+
+  class_methods do
+    def working_status
+      'internal employee'
+    end
+
+    def department
+      'Sales Department'
+    end
+  end
+
+  def contract_started_at
+    Date.yesterday
+  end
+
+  def contract_status
+    'active'
+  end
+end
+
+class Realtor
+  include RealtorJobInfo
+
+  def age
+    '45'
+  end
+
+  def gender
+    'man'
+  end
+end
+
+realtor = Realtor.new
+p Realtor.singleton_methods   # => [:department, :working_status]
+p Realtor.working_status      # => 'internal employee'
+p Realtor.department          # => 'Sales Department'
+p realtor.contract_started_at # => Date.ysterday
+p realtor.contract_status     # => 'active'
+p realtor.age                 # => '45'
+p realtor.gender              # => 'man'
 
 # _________________________________________________________________________
