@@ -1,5 +1,6 @@
 # _________________________________________________________________________
 # require, $LOAD_PATH
+# 'require' expects file to be with the .rb extension
 
 p $LOAD_PATH # => array of folders where ruby will look for files to load.
 # require 'another' # => cannot load such file -- another (LoadError) -> because it's not in the $LOAD_PATH
@@ -17,6 +18,7 @@ require './files_to_require/file_2'
 
 # _________________________________________________________________________
 # require_relative, current location
+# 'require_relative' expects file to be with the .rb extension
 
 # Use 'require' for installed gems / extensions / libs. It uses the $LOAD_PATH to find the files.
 # Use 'require_relative' for local files. It does not search in the Ruby load path or gems,

@@ -1,0 +1,17 @@
+require 'active_support'
+require 'active_support/core_ext'
+
+task :hello do
+  p 'Hello'
+end
+
+task :world do
+  p 'World'
+end
+
+task :hello_world, dependencies: [:hello, :world] do
+end
+
+task :current_time do
+  p DateTime.current
+end
